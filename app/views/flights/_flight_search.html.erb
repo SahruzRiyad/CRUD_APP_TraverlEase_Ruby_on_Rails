@@ -78,7 +78,7 @@
                             <label class="form-check-label" for="multiCity">Charter</label>
                         </div>
                     </div>
-                    <%= form_tag(search_flights_path, method: "post") do %>
+                    <%= form_tag(search_flight_home_path, method: "get") do %>
                     <div class="form-row">
                         <div class="form-group col-md-3">
                             <%= label_tag :from, "From" %>

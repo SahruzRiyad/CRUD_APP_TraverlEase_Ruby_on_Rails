@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Hotel</title>
+    <!-- Bootstrap CSS -->
+</head>
+<body>
+
+<div class="container mt-5">
+    <h2 class="text-center">Edit Hotel</h2>
+
+    <%= form_tag hotel_update_path(@hotel), method: :patch, class: 'form-horizontal' do %>
+        <div class="mt-5 form-group row">
+            <%= label_tag :hotel_name, "HOTEL NAME :", class: 'col-sm-2 col-form-label' %>
+            <div class="col-sm-10">
+                <%= text_field_tag :name, @hotel.name, class: "form-control", id: "hotel_name", placeholder: "Hotel Name" %>
+            </div>
+        </div>
+        <div class="form-group row">
+            <%= label_tag :hotel_location, "HOTEL LOCATION :", class: 'col-sm-2 col-form-label' %>
+            <div class="col-sm-10">
+                <%= text_field_tag :location, @hotel.location, class: "form-control", id: "location", placeholder: "Hotel Location" %>
+            </div>
+        </div>
+        <div class="form-group row">
+            <%= label_tag :hotel_rating, "HOTEL RATING :", class: 'col-sm-2 col-form-label' %>
+            <div class="col-sm-10">
+                <%= text_field_tag :rating, @hotel.rating, class: "form-control", id: "rating", placeholder: "Hotel Rating" %>
+            </div>
+        </div>
+        <div class="form-group row">
+            <%= label_tag :hotel_rooms, "AVAILABLE ROOMS :", class: 'col-sm-2 col-form-label' %>
+            <div class="col-sm-10">
+                <%= text_field_tag :available_rooms, @hotel.available_rooms, class: "form-control", id: "available_rooms", placeholder: "Number of Available Rooms" %>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <%= label_tag :hotel_price, "PRICE  PER NIGHT :", class: 'col-sm-2 col-form-label' %>
+            <div class="col-sm-10">
+                <%= number_field_tag :price_per_night, @hotel.price_per_night, class: "form-control", id: "price_per_night", placeholder: "Price per Night" %>
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-sm-10 offset-sm-2">
+                <%= submit_tag 'Update', class: 'btn btn-primary' %>
+                <%= link_to 'Cancel', show_hotel_index_path, class: 'btn btn-secondary' %>
+            </div>
+        </div>
+    <% end %>
+
+</div>
+
+</body>
+</html>
