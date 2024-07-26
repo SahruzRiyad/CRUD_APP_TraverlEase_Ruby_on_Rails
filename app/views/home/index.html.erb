@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TravelEase Login</title>
+  <!-- Bootstrap CSS -->
+  <style>
+    body {
+      background-color: #f8f9fa;
+    }
+    .welcome-header {
+      background-color: #007bff;
+      color: #fff;
+      padding: 30px;
+      margin-bottom: 30px;
+      text-align: center;
+      border-radius: 8px 8px 0 0;
+      margin-left: 13px; /* Adjust this value to reduce the left border size */
+      margin-right: 13px; /* Adjust this value to reduce the right border size */
+    }
+    .welcome-header h1, .welcome-header p {
+      margin: 0;
+    }
+    
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="welcome-header mt-5 ">
+      <h1>Welcome to TravelEase</h1>
+      <h6>Your one-stop solution for booking flights and hotels.</h6>
+    </div> 
+    <%= render partial: "flights/flight_search" %>
+    <% if @flights.present? %>
+      <div class="mt-4">
+        <h3>Search Results:</h3>
+        <ul>
+          <% @flights.each do |flight| %>
+            <li>
+              <%= "#{flight.from} to #{flight.to}, Departure: #{flight.journey_date}, Return: #{flight.return_date}, Class: #{flight.traveler_class}" %>
+            </li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+</body>
+</head>

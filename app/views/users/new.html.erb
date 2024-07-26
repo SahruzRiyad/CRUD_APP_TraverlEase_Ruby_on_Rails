@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TravelEase User Registration</title>
+  <!-- Bootstrap CSS -->
+  <style>
+    body {
+      background-color: #f8f9fa;
+    }
+    .login-container {
+      max-width: 420px;
+      margin: 0 auto;
+      padding: 20px;
+      border: 1px solid #ddd;
+      border-radius: 30px;
+      background-color: #f8f9fa; /* Same as body background */
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    .login-header {
+      margin-bottom: 20px;
+      color: #007bff; /* Blue color for the header */
+    }
+  </style>
+</head>
+<body>
+  <div class="container mt-5 text">
+    <div class="login-container">
+      <h2 class="login-header text-center">Register to TravelEase</h2>
+      <%= form_tag(user_create_path, method: "post") do %>
+        <div class="form-group">
+          <%= label_tag :name, "Name" %>
+          <%= text_field_tag :name, nil, class: "form-control", id: "name", aria_describedby: "nameHelp", placeholder: "Enter your name"%>
+        </div>
+
+       <div class="form-group">
+        <%= label_tag :email, "Email" %>
+        <%= email_field_tag :email, nil, class: "form-control", id: "email", aria: { describedby: "emailHelp" }, placeholder: "Enter your email" %>
+      </div>
+
+
+        <div class="form-group">
+          <%= label_tag :password, "Password" %>
+          <%= password_field_tag :password, nil, class: "form-control", id: "password", placeholder: "Enter your password" %>
+        </div>
+
+         <div class="form-group">
+          <%= label_tag :password, "Confirm Password" %>
+          <%= password_field_tag :c_password, nil, class: "form-control", id: "confirm_password", placeholder: "Confirm your password" %>
+        </div>
+  
+        <%= submit_tag "Submit", class: " btn btn-primary btn-block" %>
+        <%= link_to 'Back', user_login_path, class: 'btn btn-secondary btn-block' %> 
+      <% end %>
+    </div>
+  </div>
+
+</body>
+</html>

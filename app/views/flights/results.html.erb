@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Search Results</title>
+  <!-- Include Bootstrap CSS -->
+</head>
+<body>
+  <div class="container">
+    <h1 class="mt-4">Search Results</h1>
+
+    <% if @flights.any? %>
+      <div class="table-responsive">
+        <table class="table table-striped mt-4">
+          <thead>
+            <tr>
+              <th>Flight Name</th>
+              <th>Flight Type</th>
+              <th>Start</th>
+              <th>Destination</th>
+              <th>Departure Time</th>
+              <th>Ticket Price</th>
+              <!-- Add more headers if needed -->
+            </tr>
+          </thead>
+          <tbody>
+            <% @flights.each do |flight| %>
+              <tr>
+                <td><%= flight.flight_name %></td>
+                <td><%= flight.flight_type %></td>
+                <td><%= flight.start %></td>
+                <td><%= flight.destination %></td>
+                <td><%= flight.departure_time.strftime("%H:%M %p") if flight.departure_time %></td>
+                <td>$ <%= number_with_precision(flight.total_price, precision: 2) %></td>
+                <!-- Adjust the format of departure_time and total_price as needed -->
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    <% else %>
+      <p class="mt-4">No flights found.</p>
+    <% end %>
+
+    <%= link_to 'Back to Search', root_path, class: 'btn btn-primary mt-4' %>
+    <%= link_to 'Book Flight', '/booking/new', class: 'ml-3 btn btn-success mt-4' %>
+  </div>
+
+
+</body>
+</html>

@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TravelEase Login</title>
+  <!-- Bootstrap CSS -->
+  <style>
+   
+    .search-container {
+            background: #fff;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            margin: 20px 0;
+    }
+    .search-container .nav-tabs {
+        border-bottom: none;
+    }
+    .search-container .nav-link {
+        border: none;
+        background: none;
+        font-weight: bold;
+        color: #000;
+    }
+    .search-container .nav-link.active {
+        color: #007bff;
+        border-bottom: 3px solid #007bff;
+    }
+    .search-container .form-group {
+        margin-bottom: 1rem;
+    }
+    .search-container .btn-search {
+        background-color: #fbb034;
+        color: #fff;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        font-size: 1.2rem;
+    }
+    .search-container .radio-group {
+        display: flex;
+        justify-content: space-around;
+        margin-bottom: 20px;
+    }
+  </style>
+</head>
+<body>
+
+    <title>Flight Search</title>
+  
+    <div class="container">
+        <div class="search-container">
+            <ul class="nav nav-tabs" id="myTab" role="tablist">
+                <li class="nav-item">
+                    <a class="nav-link active" id="flight-tab" data-toggle="tab" href="#flight" role="tab" aria-controls="flight" aria-selected="true">Flight</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="hotel-tab" data-toggle="tab" href="#hotel" role="tab" aria-controls="hotel" aria-selected="false">Hotel</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="tour-tab" data-toggle="tab" href="#tour" role="tab" aria-controls="tour" aria-selected="false">Tour</a>
+                </li>
+            </ul>
+            <div class="tab-content" id="myTabContent">
+                <div class="tab-pane fade show active" id="flight" role="tabpanel" aria-labelledby="flight-tab">
+                    <div class="radio-group">
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="tripType" id="oneWay" value="one-way" checked>
+                            <label class="form-check-label" for="oneWay">Commercial</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="tripType" id="roundWay" value="round-way">
+                            <label class="form-check-label" for="roundWay">Private</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="tripType" id="multiCity" value="multi-city">
+                            <label class="form-check-label" for="multiCity">Charter</label>
+                        </div>
+                    </div>
+                    <%= form_tag(search_flights_path, method: "post") do %>
+                    <div class="form-row">
+                        <div class="form-group col-md-3">
+                            <%= label_tag :from, "From" %>
+                            <%= text_field_tag :from, nil, class: "form-control", placeholder: "Enter origin" %>
+                        </div>
+                        <div class="form-group col-md-3">
+                            <%= label_tag :to, "To" %>
+                            <%= text_field_tag :to, nil, class: "form-control", placeholder: "Enter destination" %>
+                        </div>
+                        <div class="form-group col-md-2">
+                            <%= label_tag :journeyDate, "Journey Date" %>
+                            <%= date_field_tag :journeyDate, nil, class: "form-control" %>
+                        </div>
+                        <div class="form-group col-md-2">
+                            <%= label_tag :returnDate, "Return Date" %>
+                            <%= date_field_tag :returnDate, nil, class: "form-control" %>
+                        </div>
+                        <div class="form-group col-md-2">
+                            <%= label_tag :travelerClass, "Traveler" %>
+                            <%= select_tag :travelerClass, options_for_select(["1 Traveler", "2 Travelers", "3 Travelers"], "1 Traveler"), class: "form-control" %>
+                        </div>
+                    </div>
+                    <%= submit_tag "Search", class: "btn btn-search" %>
+                <% end %>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+</body>
+</head>
