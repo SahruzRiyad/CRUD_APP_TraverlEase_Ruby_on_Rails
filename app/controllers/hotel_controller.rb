@@ -51,10 +51,10 @@ class HotelController < ApplicationController
     end
 
     def search
-        @flights = Flight.where(
-        start: params[:from],
-        destination: params[:to],
-        )
+        @hotels = Hotel.where(
+            location: params[:location],
+            rating: params[:rating]
+        ).where('available_rooms >= ?', params[:available_rooms].to_i)
         render :results  # Render the index view to display results
     end
 

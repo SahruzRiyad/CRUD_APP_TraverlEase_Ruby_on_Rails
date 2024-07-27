@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Booking</title>
+    <!-- Bootstrap CSS -->
+</head>
+<body>
+
+<div class="container mt-5">
+    <h2 class="text-center">Edit Booking</h2>
+
+    <%= form_tag booking_update_path(@booking), method: :patch, class: 'form-horizontal' do %>
+        <div class="mt-5 form-group row">
+            <%= label_tag :booking_type, "BOOKING TYPE :", class: 'col-sm-2 col-form-label' %>
+            <div class="col-sm-10">
+                <%= select_tag :booking_type, options_for_select(['Flight', 'Hotel'], @booking.booking_type), class: "form-control", id: "booking_type" %>
+            </div>
+        </div>
+        <div class="form-group row">
+            <%= label_tag :start_datetime, "FROM :", class: 'col-sm-2 col-form-label' %>
+            <div class="col-sm-10">
+                <%= text_field_tag :start_datetime, @booking.start_datetime, class: "form-control", id: "start_datetime", placeholder: "From" %>
+            </div>
+        </div>
+        <div class="form-group row">
+            <%= label_tag :end_datetime, "TO :", class: 'col-sm-2 col-form-label' %>
+            <div class="col-sm-10">
+                <%= text_field_tag :end_datetime, @booking.end_datetime, class: "form-control", id: "end_datetime", placeholder: "To" %>
+            </div>
+        </div>
+        <div class="form-group row">
+            <%= label_tag :status, "BOOKING STATUS :", class: 'col-sm-2 col-form-label' %>
+            <div class="col-sm-10">
+                <%= select_tag :status, options_for_select(['Pending', 'Confirmed', 'Cancelled'], @booking.status), class: "form-control", id: "booking_status" %>
+            </div>
+        </div>
+        <div class="form-group row">
+            <%= label_tag :total_price, "TOTAL PRICE :", class: 'col-sm-2 col-form-label' %>
+            <div class="col-sm-10">
+                <%= number_field_tag :total_price, @booking.total_price, class: "form-control", id: "total_price", placeholder: "Total Price" %>
+            </div>
+        </div>
+        <div class="form-group row">
+            <%= label_tag :payment_status, "PAYMENT STATUS :", class: 'col-sm-2 col-form-label' %>
+            <div class="col-sm-10">
+                <%= select_tag :payment_status, options_for_select(['Paid', 'Unpaid', 'Cancelled'], @booking.payment_status), class: "form-control", id: "payment_status" %>
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-sm-10 offset-sm-2">
+                <%= submit_tag 'Update', class: 'btn btn-primary' %>
+                <%= link_to 'Cancel', show_booking_index_path, class: 'btn btn-secondary' %>
+            </div>
+        </div>
+    <% end %>
+
+</div>
+
+</body>
+</html>

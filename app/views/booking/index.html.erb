@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Bookings</title>
+    <style>
+        .table th, .table td {
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container mt-5">
+   <div class="d-flex justify-content-between align-items-center mb-3">
+        <h2>Manage Bookings</h2>
+        <div class="d-flex">
+            <%= form_tag search_bookings_path, method: :get, class: "form-inline mr-2" do %>
+                <%= text_field_tag :query, params[:query], class: "form-control", id: "search_field", placeholder: "Search" %>
+                <%= submit_tag "Search", class: "btn btn-outline-dark ml-2" %>
+            <% end %>
+        </div>
+    </div>
+
+    <table class="table table-bordered table-striped">
+        <thead class="thead-dark">
+            <tr>
+                <th>Booking id</th>
+                <th>User id</th>
+                <th>Booking Type</th>
+                <th>From</th>
+                <th>To</th>
+                <th>Booking Status</th>
+                <th>Total Price</th>
+                <th>Payment Status</th>
+                <th>Booking Date & Time</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        <% @bookings.each do |booking| %>
+                <tr>
+                    <td><%= booking.id %></td>
+                    <td><%= booking.user_id %></td>
+                    <td><%= booking.booking_type %></td>
+                    <td><%= booking.start_datetime.strftime("%Y-%m-%d, %I:%M %p") %></td>
+                    <td><%= booking.end_datetime.strftime("%Y-%m-%d, %I:%M %p") %></td>
+                    <td><%= booking.status %></td>
+                    <td><%= number_to_currency(booking.total_price) %></td>
+                    <td><%= booking.payment_status %></td>
+                    <td><%= booking.booking_datetime.strftime("%Y-%m-%d, %I:%M %p") %></td>
+
+                    <td class="d-flex">
+                        <%= link_to edit_booking_path(booking), class: 'btn btn-warning btn-sm' do %>
+                            <i class="fas fa-edit"></i>
+                        <% end %>
+                       <%= button_to delete_booking_path(booking.id), method: :delete, data: { confirm: 'Are you sure?' }, class: 'ml-2 btn btn-danger btn-sm' do %>
+                            <i class="fas fa-trash-alt"></i>
+                        <% end %>
+                    </td>
+                </tr>
+            <% end %>
+        </tbody>
+    </table>
+ 
+    <div class="d-flex justify-content-between align-items-center">
+        <div>Showing <%= @bookings.count %> out of <%= Booking.count %> entries</div>
+        <%= paginate @bookings %>
+    </div> 
+</div>
+
+</body>
+</html>

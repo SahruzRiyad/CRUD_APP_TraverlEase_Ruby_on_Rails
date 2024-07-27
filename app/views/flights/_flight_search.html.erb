@@ -51,18 +51,19 @@
   
     <div class="container">
         <div class="search-container">
-            <ul class="nav nav-tabs" id="myTab" role="tablist">
+           <ul class="nav nav-tabs" id="myTab" role="tablist">
                 <li class="nav-item">
-                    <a class="nav-link active" id="flight-tab" data-toggle="tab" href="#flight" role="tab" aria-controls="flight" aria-selected="true">Flight</a>
+                    <%= link_to "Flight", "#flight", class: "nav-link active", id: "flight-tab", data: { toggle: "tab" }, role: "tab", aria: { controls: "flight", selected: "true" } %>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" id="hotel-tab" data-toggle="tab" href="#hotel" role="tab" aria-controls="hotel" aria-selected="false">Hotel</a>
+                    <%= link_to "Hotel", "#hotel", class: "nav-link", id: "hotel-tab", data: { toggle: "tab" , remote: true, url: show_hotel_index_path }, role: "tab", aria: { controls: "hotel", selected: "false" } %>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" id="tour-tab" data-toggle="tab" href="#tour" role="tab" aria-controls="tour" aria-selected="false">Tour</a>
+                    <%= link_to "Tour", "#tour", class: "nav-link", id: "tour-tab", data: { toggle: "tab" }, role: "tab", aria: { controls: "tour", selected: "false" } %>
                 </li>
             </ul>
             <div class="tab-content" id="myTabContent">
+                <!-- Flight content will be loaded here dynamically -->
                 <div class="tab-pane fade show active" id="flight" role="tabpanel" aria-labelledby="flight-tab">
                     <div class="radio-group">
                         <div class="form-check form-check-inline">
@@ -104,9 +105,38 @@
                     <%= submit_tag "Search", class: "btn btn-search" %>
                 <% end %>
                 </div>
+            
+
+            <!-- Hotel content will be loaded here dynamically -->
+                <div class="tab-pane fade mt-3" id="hotel" role="tabpanel" aria-labelledby="hotel-tab">
+                    <%= form_tag(search_hotel_home_path, method: "get") do %>
+                            <div class="form-row">
+                                <div class="form-group col-md-3">
+                                    <%= label_tag :hotel_location, "Location" %>
+                                    <%= text_field_tag :location, nil, class: "form-control", placeholder: "Enter Location" %>
+                                </div>
+                                <div class="form-group col-md-3">
+                                    <%= label_tag :hotel_rooms, "Number of Rooms" %>
+                                    <%= number_field_tag :available_rooms, 0, class: "form-control", placeholder: "Enter Number of Rooms" %>
+                                </div>
+                                <div class="form-group col-md-2">
+                                    <%= label_tag :from, "From" %>
+                                    <%= date_field_tag :from, nil, class: "form-control" %>
+                                </div>
+                                <div class="form-group col-md-2">
+                                    <%= label_tag :to, "To" %>
+                                    <%= date_field_tag :to, nil, class: "form-control" %>
+                                </div>
+                                <div class="form-group col-md-2">
+                                    <%= label_tag :hotel_type, "Hotel type" %>
+                                    <%= select_tag :rating, options_for_select(["1 Star", "2 Star", "3 Star", "4 Star", "5 Star"]), class: "form-control" %>
+                                </div>
+                            </div>
+                            <%= submit_tag "Search", class: "btn btn-search" %>
+                        <% end %>
+                </div>
             </div>
         </div>
-    </div>
-    
+    </div> 
 </body>
 </head>

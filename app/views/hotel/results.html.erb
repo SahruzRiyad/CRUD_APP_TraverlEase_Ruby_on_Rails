@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Search Results</title>
+  <!-- Include Bootstrap CSS -->
+</head>
+<body>
+  <div class="container">
+    <h1 class="mt-4">Search Results</h1>
+
+    <% if @hotels.any? %>
+      <div class="table-responsive">
+        <table class="table table-striped mt-4">
+          <thead>
+            <tr>
+              <th>Hotel Name</th>
+              <th>Hotel Location</th>
+              <th>Hotel Rating</th>
+              <th>Available Rooms</th>
+              <th>Price per Night</th>
+              <!-- Add more headers if needed -->
+            </tr>
+          </thead>
+          <tbody>
+            <% @hotels.each do |hotel| %>
+              <tr>
+                <td><%= hotel.name %></td>
+                <td><%= hotel.location %></td>
+                <td><%= hotel.rating %></td>
+                <td><%= hotel.available_rooms %></td>
+                <td>$ <%= number_with_precision(hotel.price_per_night, precision: 2) %></td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    <% else %>
+      <p class="mt-4">No Hotel found.</p>
+    <% end %>
+
+    <%= link_to 'Back to Search', root_path, class: 'btn btn-primary mt-4' %>
+    <%= link_to 'Book Hotel', '/booking/new', class: 'ml-3 btn btn-success mt-4' %>
+  </div>
+
+
+</body>
+</html>
